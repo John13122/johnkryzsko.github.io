@@ -205,127 +205,25 @@
             z-index: 100;
         }
 
-        /* Cartoony Wolf SVG */
-        .wolf {
-            width: 200px;
-            height: 200px;
-        }
-
-        /* Wolf body */
-        .wolf-body {
-            fill: #4a4a5a;
-        }
-
-        .wolf-body-light {
-            fill: #6a6a7a;
-        }
-
-        .wolf-belly {
-            fill: #8a8a9a;
-        }
-
-        /* Wolf head tilted up for howling */
-        .wolf-head {
-            fill: #4a4a5a;
-            transform-origin: 100px 120px;
-            animation: howl 4s ease-in-out infinite;
-        }
-
-        @keyframes howl {
-            0%, 70%, 100% { transform: rotate(0deg); }
-            10%, 60% { transform: rotate(-15deg); }
-        }
-
-        .wolf-snout {
-            fill: #5a5a6a;
-        }
-
-        .wolf-nose {
-            fill: #2a2a3a;
-        }
-
-        .wolf-eye {
-            fill: #1a1a2a;
-        }
-
-        .wolf-ear {
-            fill: #4a4a5a;
-        }
-
-        .wolf-ear-inner {
-            fill: #ffb6c1;
-        }
-
-        /* Tail wagging */
-        .wolf-tail {
-            fill: #4a4a5a;
-            transform-origin: 60px 150px;
-            animation: wagTail 0.5s ease-in-out infinite;
-            animation-play-state: paused;
-        }
-
-        .wolf-container:hover .wolf-tail {
-            animation-play-state: running;
-        }
-
-        /* Auto wag every few seconds */
-        .wolf-tail {
-            animation: wagTailAuto 6s ease-in-out infinite;
-        }
-
-        @keyframes wagTail {
-            0%, 100% { transform: rotate(-10deg); }
-            50% { transform: rotate(10deg); }
-        }
-
-        @keyframes wagTailAuto {
-            0%, 20%, 100% { transform: rotate(0deg); }
-            22%, 24%, 26%, 28% { transform: rotate(-15deg); }
-            23%, 25%, 27%, 29% { transform: rotate(15deg); }
-            30% { transform: rotate(0deg); }
-        }
-
-        /* Howl effect */
-        .howl-waves {
-            position: absolute;
-            top: 20px;
-            left: 120px;
-            opacity: 0;
-            animation: howlWaves 4s ease-in-out infinite;
-        }
-
-        .howl-wave {
-            stroke: rgba(255, 255, 255, 0.6);
-            stroke-width: 2;
-            fill: none;
-        }
-
-        @keyframes howlWaves {
-            0%, 70%, 100% { opacity: 0; transform: scale(0.5); }
-            20%, 50% { opacity: 1; transform: scale(1); }
-        }
-
-        /* Ground/hill */
-        .ground {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 80px;
-            background: linear-gradient(180deg, #1a1a2a 0%, #0a0a1a 100%);
-            z-index: 50;
-        }
-
-        .hill {
-            position: fixed;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
+        /* Wolf Image */
+        .wolf-image {
             width: 400px;
-            height: 100px;
-            background: radial-gradient(ellipse at center bottom, #2a2a3a 0%, #1a1a2a 70%, transparent 100%);
-            border-radius: 50% 50% 0 0;
-            z-index: 60;
+            height: auto;
+            max-height: 70vh;
+            object-fit: contain;
+            filter: drop-shadow(0 0 20px rgba(100, 150, 255, 0.4));
+            animation: wolfPulse 4s ease-in-out infinite;
+        }
+
+        @keyframes wolfPulse {
+            0%, 100% {
+                filter: drop-shadow(0 0 20px rgba(100, 150, 255, 0.4));
+                transform: scale(1);
+            }
+            50% {
+                filter: drop-shadow(0 0 40px rgba(150, 180, 255, 0.6));
+                transform: scale(1.02);
+            }
         }
 
         @media (max-width: 768px) {
@@ -358,73 +256,14 @@
     <!-- Milky Way band -->
     <div class="milky-way"></div>
 
-    <!-- Moon -->
-    <div class="moon"></div>
-
     <!-- Main message -->
     <div class="message">
         Hello World, I'm ready to rock!
     </div>
 
-    <!-- Ground and hill -->
-    <div class="ground"></div>
-    <div class="hill"></div>
-
     <!-- Wolf -->
     <div class="wolf-container">
-        <!-- Howl sound waves -->
-        <svg class="howl-waves" width="60" height="40" viewBox="0 0 60 40">
-            <path class="howl-wave" d="M5,20 Q15,10 25,20 Q35,30 45,20"/>
-            <path class="howl-wave" d="M10,12 Q20,5 30,12"/>
-            <path class="howl-wave" d="M10,28 Q20,35 30,28"/>
-        </svg>
-
-        <svg class="wolf" viewBox="0 0 200 200">
-            <!-- Tail -->
-            <ellipse class="wolf-tail" cx="45" cy="145" rx="30" ry="12" transform="rotate(-30, 45, 145)"/>
-
-            <!-- Back legs -->
-            <ellipse class="wolf-body" cx="70" cy="175" rx="15" ry="25"/>
-            <ellipse class="wolf-body" cx="90" cy="175" rx="15" ry="25"/>
-
-            <!-- Body -->
-            <ellipse class="wolf-body" cx="100" cy="140" rx="50" ry="35"/>
-            <ellipse class="wolf-belly" cx="100" cy="150" rx="35" ry="20"/>
-
-            <!-- Front legs -->
-            <ellipse class="wolf-body" cx="130" cy="175" rx="12" ry="25"/>
-            <ellipse class="wolf-body" cx="145" cy="175" rx="12" ry="25"/>
-
-            <!-- Neck -->
-            <ellipse class="wolf-body" cx="145" cy="120" rx="25" ry="30"/>
-
-            <!-- Head group (for howling animation) -->
-            <g class="wolf-head">
-                <!-- Head base -->
-                <ellipse cx="155" cy="95" rx="30" ry="25"/>
-
-                <!-- Snout pointing up -->
-                <ellipse class="wolf-snout" cx="175" cy="75" rx="18" ry="12" transform="rotate(-45, 175, 75)"/>
-
-                <!-- Nose -->
-                <circle class="wolf-nose" cx="188" cy="65" r="5"/>
-
-                <!-- Eye -->
-                <ellipse class="wolf-eye" cx="150" cy="88" rx="4" ry="5"/>
-
-                <!-- Open mouth for howling -->
-                <path fill="#3a1a2a" d="M170,82 Q180,90 185,85 Q180,95 170,90 Z"/>
-
-                <!-- Ears -->
-                <path class="wolf-ear" d="M135,75 L140,50 L150,75 Z"/>
-                <path class="wolf-ear-inner" d="M138,73 L140,58 L147,73 Z"/>
-                <path class="wolf-ear" d="M155,70 L165,45 L170,70 Z"/>
-                <path class="wolf-ear-inner" d="M158,68 L165,53 L167,68 Z"/>
-            </g>
-
-            <!-- Chest fluff -->
-            <ellipse class="wolf-body-light" cx="150" cy="145" rx="15" ry="20"/>
-        </svg>
+        <img src="wolf.jpg" alt="Werewolf howling at the moon" class="wolf-image">
     </div>
 </body>
 </html>
