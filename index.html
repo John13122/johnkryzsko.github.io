@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>John Kryzsko - Vibe Code</title>
+    <title>Hello World</title>
     <style>
         * {
             margin: 0;
@@ -12,112 +12,419 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Georgia', serif;
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(180deg,
+                #0a0a1a 0%,
+                #1a1a3a 20%,
+                #2a1a4a 40%,
+                #3a2a5a 60%,
+                #1a1a3a 80%,
+                #0a0a1a 100%);
             overflow: hidden;
+            position: relative;
         }
 
-        .container {
-            text-align: center;
-            padding: 3rem;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            animation: fadeIn 1s ease-in;
-            max-width: 600px;
+        /* Milky Way Band */
+        .milky-way {
+            position: absolute;
+            width: 200%;
+            height: 300px;
+            top: 30%;
+            left: -50%;
+            background: linear-gradient(90deg,
+                transparent 0%,
+                rgba(255, 255, 255, 0.03) 20%,
+                rgba(200, 180, 255, 0.08) 40%,
+                rgba(255, 220, 255, 0.12) 50%,
+                rgba(200, 180, 255, 0.08) 60%,
+                rgba(255, 255, 255, 0.03) 80%,
+                transparent 100%);
+            transform: rotate(-20deg);
+            filter: blur(30px);
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        h1 {
-            font-size: 3rem;
-            color: #333;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .message {
-            font-size: 1.5rem;
-            color: #555;
-            margin-bottom: 2rem;
-            line-height: 1.6;
-        }
-
-        .highlight {
-            color: #764ba2;
-            font-weight: bold;
-        }
-
-        .sparkle {
-            display: inline-block;
-            animation: sparkle 2s infinite;
-        }
-
-        @keyframes sparkle {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.7; transform: scale(1.1); }
-        }
-
-        .dots {
+        /* Stars layers */
+        .stars {
             position: absolute;
             width: 100%;
             height: 100%;
             overflow: hidden;
-            z-index: -1;
         }
 
-        .dot {
+        .stars-small, .stars-medium, .stars-large {
             position: absolute;
-            width: 10px;
-            height: 10px;
-            background: rgba(255, 255, 255, 0.5);
+            width: 100%;
+            height: 100%;
+        }
+
+        .stars-small {
+            background-image:
+                radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.8), transparent),
+                radial-gradient(1px 1px at 20% 50%, rgba(255,255,255,0.6), transparent),
+                radial-gradient(1px 1px at 30% 30%, rgba(255,255,255,0.7), transparent),
+                radial-gradient(1px 1px at 40% 70%, rgba(255,255,255,0.5), transparent),
+                radial-gradient(1px 1px at 50% 10%, rgba(255,255,255,0.8), transparent),
+                radial-gradient(1px 1px at 60% 40%, rgba(255,255,255,0.6), transparent),
+                radial-gradient(1px 1px at 70% 80%, rgba(255,255,255,0.7), transparent),
+                radial-gradient(1px 1px at 80% 25%, rgba(255,255,255,0.5), transparent),
+                radial-gradient(1px 1px at 90% 55%, rgba(255,255,255,0.8), transparent),
+                radial-gradient(1px 1px at 15% 85%, rgba(255,255,255,0.6), transparent),
+                radial-gradient(1px 1px at 25% 15%, rgba(255,255,255,0.7), transparent),
+                radial-gradient(1px 1px at 35% 95%, rgba(255,255,255,0.5), transparent),
+                radial-gradient(1px 1px at 45% 35%, rgba(255,255,255,0.8), transparent),
+                radial-gradient(1px 1px at 55% 65%, rgba(255,255,255,0.6), transparent),
+                radial-gradient(1px 1px at 65% 5%, rgba(255,255,255,0.7), transparent),
+                radial-gradient(1px 1px at 75% 45%, rgba(255,255,255,0.5), transparent),
+                radial-gradient(1px 1px at 85% 75%, rgba(255,255,255,0.8), transparent),
+                radial-gradient(1px 1px at 95% 90%, rgba(255,255,255,0.6), transparent),
+                radial-gradient(1px 1px at 5% 60%, rgba(255,255,255,0.7), transparent),
+                radial-gradient(1px 1px at 12% 42%, rgba(255,255,255,0.5), transparent);
+            animation: twinkle1 3s ease-in-out infinite;
+        }
+
+        .stars-medium {
+            background-image:
+                radial-gradient(2px 2px at 15% 25%, rgba(255,255,255,0.9), transparent),
+                radial-gradient(2px 2px at 35% 65%, rgba(255,255,255,0.7), transparent),
+                radial-gradient(2px 2px at 55% 15%, rgba(255,255,255,0.8), transparent),
+                radial-gradient(2px 2px at 75% 85%, rgba(255,255,255,0.6), transparent),
+                radial-gradient(2px 2px at 95% 35%, rgba(255,255,255,0.9), transparent),
+                radial-gradient(2px 2px at 5% 75%, rgba(255,255,255,0.7), transparent),
+                radial-gradient(2px 2px at 45% 45%, rgba(200,200,255,0.8), transparent),
+                radial-gradient(2px 2px at 85% 55%, rgba(255,220,200,0.6), transparent),
+                radial-gradient(2px 2px at 25% 5%, rgba(255,255,200,0.9), transparent),
+                radial-gradient(2px 2px at 65% 95%, rgba(200,255,255,0.7), transparent);
+            animation: twinkle2 4s ease-in-out infinite;
+        }
+
+        .stars-large {
+            background-image:
+                radial-gradient(3px 3px at 20% 40%, rgba(255,255,255,1), transparent),
+                radial-gradient(3px 3px at 80% 20%, rgba(255,255,255,0.9), transparent),
+                radial-gradient(3px 3px at 40% 80%, rgba(200,200,255,1), transparent),
+                radial-gradient(3px 3px at 60% 60%, rgba(255,220,200,0.9), transparent),
+                radial-gradient(4px 4px at 10% 10%, rgba(255,255,200,1), transparent),
+                radial-gradient(3px 3px at 90% 70%, rgba(200,255,255,0.9), transparent);
+            animation: twinkle3 5s ease-in-out infinite;
+        }
+
+        @keyframes twinkle1 {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @keyframes twinkle2 {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 0.3; }
+        }
+
+        @keyframes twinkle3 {
+            0%, 100% { opacity: 1; }
+            33% { opacity: 0.4; }
+            66% { opacity: 0.9; }
+        }
+
+        /* Moon */
+        .moon {
+            position: absolute;
+            top: 10%;
+            right: 15%;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle at 30% 30%,
+                #ffffd0 0%,
+                #f0e68c 40%,
+                #daa520 100%);
             border-radius: 50%;
-            animation: float 6s infinite ease-in-out;
+            box-shadow:
+                0 0 20px rgba(255, 255, 200, 0.5),
+                0 0 40px rgba(255, 255, 150, 0.3),
+                0 0 60px rgba(255, 255, 100, 0.2),
+                inset -15px -10px 20px rgba(0, 0, 0, 0.15);
+            z-index: 5;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0) translateX(0); }
-            50% { transform: translateY(-20px) translateX(10px); }
+        .moon::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            top: 25%;
+            left: 30%;
         }
 
-        .dot:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
-        .dot:nth-child(2) { left: 80%; top: 30%; animation-delay: 1s; }
-        .dot:nth-child(3) { left: 30%; top: 70%; animation-delay: 2s; }
-        .dot:nth-child(4) { left: 70%; top: 60%; animation-delay: 1.5s; }
-        .dot:nth-child(5) { left: 50%; top: 10%; animation-delay: 0.5s; }
+        .moon::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 25px;
+            background: rgba(0, 0, 0, 0.08);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+        }
+
+        /* Message */
+        .message {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-align: center;
+            text-shadow:
+                0 0 10px rgba(255, 255, 255, 0.8),
+                0 0 20px rgba(200, 180, 255, 0.6),
+                0 0 30px rgba(150, 100, 255, 0.4);
+            position: relative;
+            z-index: 20;
+            animation: textGlow 3s ease-in-out infinite;
+            margin-bottom: 100px;
+        }
+
+        @keyframes textGlow {
+            0%, 100% {
+                text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(200, 180, 255, 0.6), 0 0 30px rgba(150, 100, 255, 0.4);
+            }
+            50% {
+                text-shadow: 0 0 20px rgba(255, 255, 255, 1), 0 0 40px rgba(200, 180, 255, 0.8), 0 0 60px rgba(150, 100, 255, 0.6);
+            }
+        }
+
+        /* Wolf Container */
+        .wolf-container {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+        }
+
+        /* Cartoony Wolf SVG */
+        .wolf {
+            width: 200px;
+            height: 200px;
+        }
+
+        /* Wolf body */
+        .wolf-body {
+            fill: #4a4a5a;
+        }
+
+        .wolf-body-light {
+            fill: #6a6a7a;
+        }
+
+        .wolf-belly {
+            fill: #8a8a9a;
+        }
+
+        /* Wolf head tilted up for howling */
+        .wolf-head {
+            fill: #4a4a5a;
+            transform-origin: 100px 120px;
+            animation: howl 4s ease-in-out infinite;
+        }
+
+        @keyframes howl {
+            0%, 70%, 100% { transform: rotate(0deg); }
+            10%, 60% { transform: rotate(-15deg); }
+        }
+
+        .wolf-snout {
+            fill: #5a5a6a;
+        }
+
+        .wolf-nose {
+            fill: #2a2a3a;
+        }
+
+        .wolf-eye {
+            fill: #1a1a2a;
+        }
+
+        .wolf-ear {
+            fill: #4a4a5a;
+        }
+
+        .wolf-ear-inner {
+            fill: #ffb6c1;
+        }
+
+        /* Tail wagging */
+        .wolf-tail {
+            fill: #4a4a5a;
+            transform-origin: 60px 150px;
+            animation: wagTail 0.5s ease-in-out infinite;
+            animation-play-state: paused;
+        }
+
+        .wolf-container:hover .wolf-tail {
+            animation-play-state: running;
+        }
+
+        /* Auto wag every few seconds */
+        .wolf-tail {
+            animation: wagTailAuto 6s ease-in-out infinite;
+        }
+
+        @keyframes wagTail {
+            0%, 100% { transform: rotate(-10deg); }
+            50% { transform: rotate(10deg); }
+        }
+
+        @keyframes wagTailAuto {
+            0%, 20%, 100% { transform: rotate(0deg); }
+            22%, 24%, 26%, 28% { transform: rotate(-15deg); }
+            23%, 25%, 27%, 29% { transform: rotate(15deg); }
+            30% { transform: rotate(0deg); }
+        }
+
+        /* Howl effect */
+        .howl-waves {
+            position: absolute;
+            top: 20px;
+            left: 120px;
+            opacity: 0;
+            animation: howlWaves 4s ease-in-out infinite;
+        }
+
+        .howl-wave {
+            stroke: rgba(255, 255, 255, 0.6);
+            stroke-width: 2;
+            fill: none;
+        }
+
+        @keyframes howlWaves {
+            0%, 70%, 100% { opacity: 0; transform: scale(0.5); }
+            20%, 50% { opacity: 1; transform: scale(1); }
+        }
+
+        /* Ground/hill */
+        .ground {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: linear-gradient(180deg, #1a1a2a 0%, #0a0a1a 100%);
+            z-index: 50;
+        }
+
+        .hill {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 400px;
+            height: 100px;
+            background: radial-gradient(ellipse at center bottom, #2a2a3a 0%, #1a1a2a 70%, transparent 100%);
+            border-radius: 50% 50% 0 0;
+            z-index: 60;
+        }
+
+        @media (max-width: 768px) {
+            .message {
+                font-size: 2rem;
+                padding: 0 1rem;
+                margin-bottom: 150px;
+            }
+            .moon {
+                width: 80px;
+                height: 80px;
+                top: 5%;
+                right: 10%;
+            }
+            .wolf {
+                width: 150px;
+                height: 150px;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="dots">
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
+    <!-- Starry background -->
+    <div class="stars">
+        <div class="stars-small"></div>
+        <div class="stars-medium"></div>
+        <div class="stars-large"></div>
     </div>
 
-    <div class="container">
-        <h1>John Kryzsko</h1>
-        <div class="message">
-            <span class="sparkle">Hello world!</span><br>
-            I'm ready to <span class="highlight">vibe code</span>
-        </div>
+    <!-- Milky Way band -->
+    <div class="milky-way"></div>
+
+    <!-- Moon -->
+    <div class="moon"></div>
+
+    <!-- Main message -->
+    <div class="message">
+        Hello World, I'm ready to rock!
+    </div>
+
+    <!-- Ground and hill -->
+    <div class="ground"></div>
+    <div class="hill"></div>
+
+    <!-- Wolf -->
+    <div class="wolf-container">
+        <!-- Howl sound waves -->
+        <svg class="howl-waves" width="60" height="40" viewBox="0 0 60 40">
+            <path class="howl-wave" d="M5,20 Q15,10 25,20 Q35,30 45,20"/>
+            <path class="howl-wave" d="M10,12 Q20,5 30,12"/>
+            <path class="howl-wave" d="M10,28 Q20,35 30,28"/>
+        </svg>
+
+        <svg class="wolf" viewBox="0 0 200 200">
+            <!-- Tail -->
+            <ellipse class="wolf-tail" cx="45" cy="145" rx="30" ry="12" transform="rotate(-30, 45, 145)"/>
+
+            <!-- Back legs -->
+            <ellipse class="wolf-body" cx="70" cy="175" rx="15" ry="25"/>
+            <ellipse class="wolf-body" cx="90" cy="175" rx="15" ry="25"/>
+
+            <!-- Body -->
+            <ellipse class="wolf-body" cx="100" cy="140" rx="50" ry="35"/>
+            <ellipse class="wolf-belly" cx="100" cy="150" rx="35" ry="20"/>
+
+            <!-- Front legs -->
+            <ellipse class="wolf-body" cx="130" cy="175" rx="12" ry="25"/>
+            <ellipse class="wolf-body" cx="145" cy="175" rx="12" ry="25"/>
+
+            <!-- Neck -->
+            <ellipse class="wolf-body" cx="145" cy="120" rx="25" ry="30"/>
+
+            <!-- Head group (for howling animation) -->
+            <g class="wolf-head">
+                <!-- Head base -->
+                <ellipse cx="155" cy="95" rx="30" ry="25"/>
+
+                <!-- Snout pointing up -->
+                <ellipse class="wolf-snout" cx="175" cy="75" rx="18" ry="12" transform="rotate(-45, 175, 75)"/>
+
+                <!-- Nose -->
+                <circle class="wolf-nose" cx="188" cy="65" r="5"/>
+
+                <!-- Eye -->
+                <ellipse class="wolf-eye" cx="150" cy="88" rx="4" ry="5"/>
+
+                <!-- Open mouth for howling -->
+                <path fill="#3a1a2a" d="M170,82 Q180,90 185,85 Q180,95 170,90 Z"/>
+
+                <!-- Ears -->
+                <path class="wolf-ear" d="M135,75 L140,50 L150,75 Z"/>
+                <path class="wolf-ear-inner" d="M138,73 L140,58 L147,73 Z"/>
+                <path class="wolf-ear" d="M155,70 L165,45 L170,70 Z"/>
+                <path class="wolf-ear-inner" d="M158,68 L165,53 L167,68 Z"/>
+            </g>
+
+            <!-- Chest fluff -->
+            <ellipse class="wolf-body-light" cx="150" cy="145" rx="15" ry="20"/>
+        </svg>
     </div>
 </body>
 </html>
