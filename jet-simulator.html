@@ -233,8 +233,12 @@
         </div>
 
         <div class="control-group">
-            <label>EM Field <span id="v-em">0.0</span> T</label>
-            <input type="range" id="em" min="0" max="5" step="0.1" value="0">
+            <label>Plasma Magnet <span id="v-em">0.0</span> T</label>
+            <input type="range" id="em" min="0" max="10" step="0.1" value="0">
+        </div>
+
+        <div class="em-info" id="em-info" style="display: none; font-size: 0.7rem; color: #a6f; margin-top: 5px;">
+            Ionization threshold: <span id="ion-threshold">3000</span> K
         </div>
 
         <div class="readout">
@@ -283,7 +287,13 @@
         const GAMMA = 1.4;
         const T_AMBIENT = 288;
         const SPEED_OF_SOUND = 343;
-        const IONIZATION_TEMP = 3000;
+        const BASE_IONIZATION_TEMP = 3000;
+
+        // EM field lowers ionization threshold (magnetic confinement aids plasma formation)
+        function getIonizationTemp() {
+            // Each Tesla reduces threshold by ~200K (strong magnets help ionize air)
+            return Math.max(1200, BASE_IONIZATION_TEMP - config.emField * 200);
+        }
         const DRAG_COEFFICIENT = 0.02;
         const AIRCRAFT_AREA = 25;   // m² reference area
 
@@ -395,7 +405,7 @@
         }
 
         function hasPlasma() {
-            return getStagnationTemp() > IONIZATION_TEMP;
+            return getStagnationTemp() > getIonizationTemp();
         }
 
         function getMachAngle() {
@@ -444,7 +454,7 @@
 
                 let r, g, b;
                 if (plasma) {
-                    const intensity = Math.min((temp - IONIZATION_TEMP) / 5000, 1);
+                    const intensity = Math.min((temp - getIonizationTemp()) / 5000, 1);
                     r = 180 + intensity * 75;
                     g = 100 + intensity * 100;
                     b = 255;
@@ -555,7 +565,7 @@
             draw() {
                 const lifeRatio = this.life / this.maxLife;
                 const temp = getStagnationTemp();
-                const intensity = Math.min((temp - IONIZATION_TEMP) / 8000, 1);
+                const intensity = Math.min((temp - getIonizationTemp()) / 8000, 1);
                 const hueShift = config.emField * 20;
                 const hue = (this.hue + hueShift) % 360;
 
@@ -769,7 +779,7 @@
             if (!hasPlasma()) return;
             const jet = getJetPoints();
             const temp = getStagnationTemp();
-            const intensity = Math.min((temp - IONIZATION_TEMP) / 10000, 1);
+            const intensity = Math.min((temp - getIonizationTemp()) / 10000, 1);
 
             ctx.save();
             const sheathGrad = ctx.createRadialGradient(
@@ -819,7 +829,7 @@
 
             const plasmaEl = document.getElementById('r-plasma');
             if (plasma) {
-                const ionization = Math.min((temp - IONIZATION_TEMP) / 5000 * 100, 100);
+                const ionization = Math.min((temp - getIonizationTemp()) / 5000 * 100, 100);
                 plasmaEl.textContent = ionization.toFixed(0) + '% ionized';
                 plasmaEl.className = 'plasma-indicator';
             } else {
@@ -828,6 +838,15 @@
             }
 
             document.getElementById('warning').classList.toggle('active', plasma);
+
+            // Show ionization threshold when EM field is active
+            const emInfo = document.getElementById('em-info');
+            if (config.emField > 0) {
+                emInfo.style.display = 'block';
+                document.getElementById('ion-threshold').textContent = Math.round(getIonizationTemp());
+            } else {
+                emInfo.style.display = 'none';
+            }
 
             // Update boost status indicators
             const superStatus = document.getElementById('super-status');
